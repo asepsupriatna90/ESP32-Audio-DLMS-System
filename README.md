@@ -1,83 +1,103 @@
-# ESP32 Digital Signal Processor (DSP) Controller
+# 🎛️ ESP32 Audio DSP Controller with LCD & Web UI
 
-Sistem kontrol audio DSP dengan ESP32 yang menampilkan antarmuka berbasis web dan kontrol fisik menggunakan LCD dan encoder.
+Sistem kontrol audio digital berbasis **ESP32** yang menggabungkan antarmuka fisik (LCD dan rotary encoder) dengan antarmuka web responsif. Dirancang untuk mengatur parameter DSP secara real-time, sistem ini cocok untuk aplikasi audio profesional maupun DIY.
 
-## Fitur
+---
 
-- **Kontrol Crossover**: Pengaturan frekuensi cutoff untuk 4-way crossover (Sub, Low, Mid, High)
-- **Pengaturan Compressor**: Threshold, ratio, attack dan release untuk dinamika audio
-- **Limiter**: Threshold limiter untuk membatasi output audio
-- **Delay**: Pengaturan delay untuk tiap band untuk koreksi fase
-- **Preset**: Simpan, muat, dan terapkan preset audio
-- **Kontrol Fisik**: Navigasi menu menggunakan encoder dan tombol
-- **Panel Kontrol Web**: Antarmuka web yang responsif untuk pengaturan DSP
+## 📖 Deskripsi Umum
 
-## Komponen Hardware
+Proyek ini memungkinkan pengguna untuk mengontrol berbagai parameter Digital Signal Processing (DSP) melalui:
 
-- ESP32 Development Board
-- LCD I2C 16x2
-- Rotary Encoder
-- Tombol Pushbutton
-- Modul DSP Audio (eksternel - tergantung implementasi)
+- **Antarmuka Fisik**: Menggunakan LCD I2C 16x2 dan rotary encoder untuk navigasi menu dan pengaturan parameter.
+- **Antarmuka Web**: Mengakses dan mengatur parameter DSP melalui browser web yang responsif.
 
-## Penggunaan
+Fitur utama meliputi pengaturan crossover, compressor, limiter, delay, dan manajemen preset.
 
-### Kontrol Fisik
+---
 
-1. Putar encoder untuk memilih preset
-2. Tekan encoder sekali untuk masuk ke mode edit gain
-3. Dalam mode edit gain:
-   - Putar encoder untuk mengubah nilai gain
-   - Tekan singkat untuk berpindah ke band berikutnya
-   - Tekan dan tahan untuk menyimpan pengaturan
+## 🔧 Komponen Hardware
 
-### Kontrol Web
+- **ESP32 Development Board**: Otak dari sistem kontrol.
+- **LCD I2C 16x2**: Menampilkan menu dan status sistem.
+- **Rotary Encoder**: Navigasi menu dan pengaturan nilai parameter.
+- **Pushbutton**: Konfirmasi pilihan dan navigasi tambahan.
+- **Modul DSP Audio**: Modul eksternal untuk pemrosesan sinyal audio (tergantung implementasi).
 
-1. Hubungkan ke jaringan Wi-Fi ESP32-AUDIO (password: 12345678)
-2. Akses panel kontrol di alamat IP 192.168.4.1
-3. Sesuaikan parameter menggunakan antarmuka web
-4. Gunakan preset untuk menyimpan dan memuat pengaturan
+---
 
-## Setup Firmware
+## 🌐 Fitur Sistem
 
-1. Install Arduino IDE dan tambahkan dukungan ESP32
-2. Install library yang diperlukan:
-   - WiFi.h
-   - WebServer.h
-   - EEPROM.h
-   - LiquidCrystal_I2C.h
-   - Encoder.h
-   - ArduinoJson.h
-   - SPIFFS.h
-3. Unggah kode ke ESP32
-4. Unggah file web ke SPIFFS:
-   - index.html
-   - style.css
-   - script.js
+- **Crossover Control**: Pengaturan frekuensi cutoff untuk 4-way crossover (Sub, Low, Mid, High).
+- **Compressor Settings**: Pengaturan threshold, ratio, attack, dan release untuk dinamika audio.
+- **Limiter**: Pengaturan threshold limiter untuk membatasi output audio.
+- **Delay**: Pengaturan delay untuk tiap band guna koreksi fase.
+- **Preset Management**: Simpan, muat, dan terapkan preset audio sesuai kebutuhan.
+- **Physical Control**: Navigasi menu menggunakan rotary encoder dan tombol fisik.
+- **Web Control Panel**: Antarmuka web yang responsif untuk pengaturan DSP secara remote.
 
-## Persiapan File Web
+---
 
-1. Install alat SPIFFS untuk Arduino IDE
-2. Buat folder `data` di direktori sketch Arduino
-3. Salin file frontend (index.html, style.css, script.js) ke folder data
-4. Unggah file menggunakan "ESP32 Sketch Data Upload" dari menu Tools
+## 🚀 Cara Instalasi & Penggunaan
 
-## Struktur Data EEPROM
+### 1. Persiapan
 
-- Alamat 0-511: Preset gain manual (GainPreset)
-- Alamat 512+: Preset DSP untuk web UI (DSPSettings)
+- Pastikan Anda telah menginstal [Arduino IDE](https://www.arduino.cc/en/software).
+- Tambahkan board ESP32 ke Arduino IDE melalui Board Manager dengan URL:
+https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json
+- Instal library yang diperlukan melalui Library Manager:
+- `Wire` untuk komunikasi I2C.
+- `ESPAsyncWebServer` dan `AsyncTCP` untuk antarmuka web.
+- Library tambahan sesuai dengan modul DSP yang digunakan.
 
-## API Endpoints
+### 2. Unggah Kode
 
-- `/getSettings`: Mendapatkan pengaturan terkini sebagai JSON
-- `/updateParam`: Memperbarui parameter tunggal (name, value)
-- `/applyPreset`: Menerapkan preset (presetIndex)
-- `/savePreset`: Menyimpan preset saat ini (presetIndex)
-- `/loadPreset`: Memuat preset (presetIndex)
+- Buka file `AudioDSP.ino` di Arduino IDE.
+- Sesuaikan konfigurasi pin dan parameter sesuai dengan hardware Anda.
+- Unggah kode ke board ESP32 Anda.
 
-## Troubleshooting
+### 3. Unggah File Web UI
 
-- **Tidak dapat terhubung ke Wi-Fi**: Pastikan ESP32 menyala dan dalam jangkauan
-- **LCD tidak menampilkan teks**: Periksa koneksi I2C dan alamat LCD
-- **Encoder tidak berfungsi**: Periksa koneksi pin dan nilai pullup
-- **Web UI tidak berfungsi**: Pastikan file sudah diunggah ke SPIFFS dengan benar
+- Gunakan [ESP32 Sketch Data Upload Tool](https://randomnerdtutorials.com/install-esp32-filesystem-uploader-arduino-ide/) untuk mengunggah folder `data/` ke SPIFFS.
+
+### 4. Akses Antarmuka Web
+
+- Hubungkan perangkat ke jaringan Wi-Fi ESP32 atau jaringan lokal.
+- Buka browser dan akses alamat IP ESP32 yang ditampilkan di Serial Monitor.
+
+---
+
+## 📁 Struktur Direktori
+
+ESP32-Audio-DLMS-System/
+├── AudioDSP.ino # Kode utama ESP32
+├── data/ # File HTML, CSS, dan JavaScript untuk antarmuka web
+├── src/ # Kode sumber tambahan
+├── README.md # Dokumentasi proyek
+└── LICENSE # Lisensi proyek
+
+---
+
+## 💡 Keunggulan Sistem
+
+- **Real-Time Control**: Pengaturan parameter DSP secara langsung melalui antarmuka fisik dan web.
+- **Dual Interface**: Kombinasi kontrol fisik dan web memberikan fleksibilitas dalam pengoperasian.
+- **Modular Design**: Mudah disesuaikan dengan berbagai modul DSP dan kebutuhan pengguna.
+- **Open Source**: Kode sumber tersedia untuk dikembangkan dan disesuaikan lebih lanjut.
+
+---
+## 🤝 Kontribusi
+
+Kontribusi sangat dihargai! Silakan fork repositori ini dan ajukan pull request untuk perbaikan atau penambahan fitur.
+
+---
+
+## 📬 Kontak
+
+📧 asepsupriatna90@gmail.com  
+🔗 [GitHub @asepsupriatna90](https://github.com/asepsupriatna90)
+
+---
+
+## 📄 Lisensi
+
+Proyek ini dilisensikan di bawah [MIT License](LICENSE).
