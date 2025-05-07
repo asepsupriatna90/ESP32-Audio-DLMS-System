@@ -1,0 +1,178 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #1e1e2f;
+  color: #ffffff;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+h1, h2 {
+  color: #66d9ef;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.block {
+  background-color: #2c2c3e;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.control-group, .grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.control-group label, .grid label {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+input[type="number"], input[type="range"] {
+  width: 100%;
+  padding: 10px;
+  background: #444;
+  border: 1px solid #666;
+  color: white;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+button {
+  padding: 10px 20px;
+  border: none;
+  background-color: #66d9ef;
+  color: #1e1e2f;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s ease;
+  font-size: 1rem;
+  margin-top: 1rem;
+  margin-right: 0.5rem;
+}
+
+button:hover {
+  background-color: #4db4cc;
+}
+
+button:active {
+  background-color: #3c9fa0;
+}
+
+select {
+  padding: 10px;
+  background-color: #444;
+  border: 1px solid #666;
+  color: white;
+  font-size: 1rem;
+  border-radius: 4px;
+  width: 100%;
+}
+
+select:focus {
+  outline: none;
+  border-color: #66d9ef;
+}
+
+.grid label {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+h1, h2 {
+  color: #66d9ef;
+}
+
+section {
+  margin-top: 20px;
+}
+
+/* Tambahan untuk tampilan nilai range slider */
+.range-container {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+  align-items: center;
+}
+
+.range-value {
+  background-color: #444;
+  padding: 5px 10px;
+  border-radius: 4px;
+  min-width: 40px;
+  text-align: center;
+}
+
+/* Gaya untuk notifikasi */
+.notification {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 15px 25px;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  z-index: 1000;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.notification.info {
+  background-color: #3498db;
+}
+
+.notification.success {
+  background-color: #2ecc71;
+}
+
+.notification.error {
+  background-color: #e74c3c;
+}
+
+/* Responsif untuk perangkat mobile */
+@media (max-width: 768px) {
+  .control-group, .grid {
+    grid-template-columns: 1fr;
+  }
+  
+  button {
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+  
+  .block {
+    padding: 1rem;
+  }
+  
+  h1 {
+    font-size: 1.8rem;
+  }
+  
+  h2 {
+    font-size: 1.5rem;
+  }
+}

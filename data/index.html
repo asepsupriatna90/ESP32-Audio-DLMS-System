@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ESP32 DSP Control</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>ESP32 DSP Control Panel</h1>
+    </header>
+    <main>
+      <section class="block">
+        <h2>Pengaturan Crossover</h2>
+        <div class="control-group">
+          <label for="fcSub">Crossover Sub (Hz)</label>
+          <input type="number" id="fcSub" value="30" min="20" max="80">
+        </div>
+        <div class="control-group">
+          <label for="fcLow">Crossover Low (Hz)</label>
+          <input type="number" id="fcLow" value="100" min="50" max="200">
+        </div>
+        <div class="control-group">
+          <label for="fcMid">Crossover Mid (Hz)</label>
+          <input type="number" id="fcMid" value="1000" min="500" max="2000">
+        </div>
+        <div class="control-group">
+          <label for="fcHigh">Crossover High (Hz)</label>
+          <input type="number" id="fcHigh" value="4000" min="2000" max="8000">
+        </div>
+      </section>
+
+      <section class="block">
+        <h2>Pengaturan Compressor (Semua Band)</h2>
+        <div class="grid">
+          <label for="threshold">Threshold (dB)</label>
+          <div class="range-container">
+            <input type="range" id="threshold" min="-60" max="0" value="-18">
+            <span class="range-value" id="thresholdValue">-18</span>
+          </div>
+
+          <label for="ratio">Ratio</label>
+          <input type="number" id="ratio" value="4" min="1" max="20">
+
+          <label for="attack">Attack (s)</label>
+          <input type="number" step="0.01" id="attack" value="0.01" min="0.01" max="1">
+
+          <label for="release">Release (s)</label>
+          <input type="number" step="0.01" id="release" value="0.05" min="0.01" max="1">
+        </div>
+      </section>
+
+      <section class="block">
+        <h2>Limiter</h2>
+        <div class="control-group">
+          <label for="limiterThresh">Limiter Threshold (dB)</label>
+          <div class="range-container">
+            <input type="range" id="limiterThresh" min="-20" max="0" value="-1">
+            <span class="range-value" id="limiterThreshValue">-1</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="block">
+        <h2>Delay & Fase</h2>
+        <div class="grid">
+          <label for="delayLow">Delay Low (ms)</label>
+          <input type="number" id="delayLow" value="0" min="0" max="200">
+
+          <label for="delayLowMid">Delay Low-Mid (ms)</label>
+          <input type="number" id="delayLowMid" value="0" min="0" max="200">
+
+          <label for="delayHighMid">Delay High-Mid (ms)</label>
+          <input type="number" id="delayHighMid" value="0" min="0" max="200">
+
+          <label for="delayHigh">Delay High (ms)</label>
+          <input type="number" id="delayHigh" value="0" min="0" max="200">
+        </div>
+      </section>
+
+      <section class="block">
+        <h2>Preset</h2>
+        <div class="control-group">
+          <label for="presetSelect">Pilih Preset:</label>
+          <select id="presetSelect">
+            <option value="0">Default</option>
+            <option value="1">Rock</option>
+            <option value="2">Jazz</option>
+            <option value="3">Dangdut</option>
+            <option value="4">Pop</option>
+          </select>
+        </div>
+        <div class="button-group">
+          <button onclick="applyPreset()">Terapkan Preset</button>
+          <button onclick="savePreset()">Simpan Preset</button>
+          <button onclick="loadPreset()">Muat Preset</button>
+          <button onclick="loadCurrentSettings()">Segarkan</button>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    // Script kecil untuk memperbarui tampilan nilai range slider
+    document.addEventListener('DOMContentLoaded', function() {
+      // Fungsi untuk memperbarui tampilan nilai
+      function updateRangeValue(rangeName) {
+        const slider = document.getElementById(rangeName);
+        const valueDisplay = document.getElementById(rangeName + 'Value');
+        
+        if (slider && valueDisplay) {
+          // Perbarui tampilan nilai awal
+          valueDisplay.textContent = slider.value;
+          
+          // Tambahkan event listener untuk memperbarui nilai saat slider digeser
+          slider.addEventListener('input', function() {
+            valueDisplay.textContent = slider.value;
+          });
+        }
+      }
+      
+      // Perbarui nilai untuk semua slider
+      updateRangeValue('threshold');
+      updateRangeValue('limiterThresh');
+    });
+  </script>
+  
+  <script src="script.js"></script>
+</body>
+</html>
