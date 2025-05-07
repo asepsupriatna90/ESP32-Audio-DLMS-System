@@ -93,7 +93,7 @@ Kontribusi sangat dihargai! Silakan fork repositori ini dan ajukan pull request 
 
 ## 📬 Kontak
 
-📧 asepsupriatna90@gmail.com  
+📧 asepsupriatna1990@gmail.com  
 🔗 [GitHub @asepsupriatna90](https://github.com/asepsupriatna90)
 
 ---
